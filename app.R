@@ -14,7 +14,7 @@ library(shinyWidgets)
 library(shinydashboard)
 
     
-ui <-   navbarPage(fileInput("file", NULL),
+ui <-   navbarPage("Meta regression", fileInput("file", NULL),
         tabPanel(
             "LR Plot",
         fluidPage(
