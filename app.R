@@ -71,7 +71,7 @@ server <- function(input, output, session) {
 
   output$forest <- renderPlot({
     forest(random_eff(),
-      addfit = FALSE, level = 95, header = TRUE, xlab = "Fat %", ilab = cbind(df()$n, df()$Gender, paste(df()$Level), paste(df()$Method)),
+      addfit = FALSE, level = 95, header = TRUE, xlab = "Fat %", ilab = cbind(df()$n, df()$Gender, df()$Level, df()$Method),
       ilab.xpos = c(-25, -20, -13, -3)
     )
     op <- par(cex = 1.25, font = 4)
