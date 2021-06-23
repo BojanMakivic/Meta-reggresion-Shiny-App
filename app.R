@@ -17,36 +17,35 @@ library(plotly)
 
 ui <- fluidPage(
   titlePanel("Shiny meta regression"),
-  fluidRow(
-    column(
-      12,
-      wellPanel(
-        navbarPage(
-          "Meta regression", fileInput("file", NULL),
-          tabPanel(
-            "Results",
-            fluidPage(
-              tableOutput("tab"),
-              verbatimTextOutput("lmSummary")
-            )
-          ),
-          tabPanel(
-            "Funnel plot",
-            fluidPage(
-              plotOutput("plot", height = "820px"),
-            )
-          ),
-          tabPanel(
-            "Forest plot",
-            fluidPage(
-              plotOutput("forest", height = "820px")
-            )
-          )
+  navbarPage(
+    "Meta",
+    tabPanel(
+      "Results",
+      sidebarLayout(
+        sidebarPanel(
+          fileInput("file", "Select file from your computer:"),
+          uiOutput("var_ui")
+        ),
+        mainPanel(
+          verbatimTextOutput("lmSummary")
         )
       )
+    ),
+    tabPanel(
+      "Funnel plot",
+      sidebarPanel(fileInput("file", "Select file from your computer:")),
+      mainPanel(
+        plotOutput("plot", height = "820px")
+      )
+    ),
+    tabPanel(
+      "Forest plot",
+      plotOutput("forest", height = "820px")
     )
   )
 )
+
+
 
 server <- function(input, output, session) {
   df <- reactive({
