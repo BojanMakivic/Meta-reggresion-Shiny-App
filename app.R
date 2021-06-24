@@ -20,23 +20,24 @@ ui <- fluidPage(
   navbarPage(
     "Meta",
     tabPanel(
-      "Results",
+      "Load data",
       sidebarLayout(
         sidebarPanel(
           fileInput("file", "Select file from your computer:"),
           uiOutput("var_ui")
         ),
         mainPanel(
-          verbatimTextOutput("lmSummary")
+          tableOutput("load_d")
         )
       )
     ),
     tabPanel(
+      "Statistics summary",
+      verbatimTextOutput("lmSummary")
+    ),
+    tabPanel(
       "Funnel plot",
-      sidebarPanel(fileInput("file", "Select file from your computer:")),
-      mainPanel(
-        plotOutput("plot", height = "820px")
-      )
+      plotOutput("plot", height = "820px")
     ),
     tabPanel(
       "Forest plot",
@@ -52,6 +53,12 @@ server <- function(input, output, session) {
     req(input$file)
     read_excel(input$file$datapath)
   })
+
+  output$load_d <- renderTable({
+    req(df())
+    df()
+  })
+
 
   random_eff <- reactive({
     req(df())
