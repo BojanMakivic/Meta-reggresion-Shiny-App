@@ -77,11 +77,11 @@ server <- function(input, output, session) {
 
   output$forest <- renderPlot({
     forest(random_eff(),
-      addfit = FALSE, level = 95, header = TRUE, xlab = "Fat %", ilab = cbind(df()$n, df()$Gender, df()$Level, df()$Method),
-      ilab.xpos = c(-25, -20, -13, -3)
+      addfit = TRUE, level = 95, header = TRUE, xlab = "Fat %", ilab = cbind(df()$n, df()$Gender, df()$Level, df()$Method),
+      ilab.xpos = c(-18, -14, -8, -3)
     )
-    op <- par(cex = 1.25, font = 4)
-    text(c(-25, -20, -13, -3), 75, c("Sample", "Gender", "Level", "Method"))
+    op <- par(cex = 0.75, font = 4)
+    text(c(-18, -14, -8, -3), 94, c("n = Subjects", "Gender", "Level", "Method"))
   })
 }
 shinyApp(ui, server)
